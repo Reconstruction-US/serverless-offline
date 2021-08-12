@@ -58,7 +58,7 @@ export default class HttpServer {
   createRoutes(functionKey, albEvent) {
     const method = albEvent.conditions.method?.[0]?.toUpperCase() || 'ANY'
     const { path } = albEvent.conditions
-    const hapiPath = generateHapiPath(path[0], this.#options, this.#serverless)
+    const hapiPath = generateHapiPath(Array.isArray(path)?path[0]:path, this.#options, this.#serverless)
 
     const stage = this.#options.stage || this.#serverless.service.provider.stage
     const { host, httpPort } = this.#options
