@@ -87,7 +87,8 @@ export default class ServerlessOffline {
       eventModules.push(this._createHttp(httpEvents))
     }
 
-    if (scheduleEvents.length > 0) {
+    const disableScheduledFunctions = this.#options.disableScheduledFunctions || false;
+    if (!disableScheduledFunctions && scheduleEvents.length > 0) {
       eventModules.push(this._createSchedule(scheduleEvents))
     }
 
